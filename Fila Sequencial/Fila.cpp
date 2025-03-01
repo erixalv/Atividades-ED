@@ -1,8 +1,11 @@
 #include "Fila.h"
 #include <iostream>
 
+using namespace std;
+
 Fila::Fila() {
-    inicio = fim = nElements = 0;
+    inicio = nElements = 0;
+    fim = -1;
     sizeMax = 100;
     dados = new int[sizeMax];
 }
@@ -26,14 +29,21 @@ int Fila::size() {
 }
 
 int Fila::first() {
-    if(Fila::isEmpty()) {
+    if (Fila::isEmpty()) {
         return -1;
     }
     return dados[inicio];
 }
 
-bool Fila::insert(int v) {
+int Fila::last() {
     if (Fila::isEmpty()) {
+        return -1;
+    }
+    return dados[fim];
+}
+
+bool Fila::insert(int v) {
+    if (Fila::isFull()) {
         return false;
     }
     
@@ -41,6 +51,7 @@ bool Fila::insert(int v) {
     dados[fim] = v;
 
     nElements++;
+    cout << "Elemento inserido." << endl;
     return true;
 }
 
@@ -54,12 +65,13 @@ void Fila::remove() {
 }
 
 void Fila::show() {
-    for (int i = 0; i < sizeMax; i++) {
-        if(i != (sizeMax - 1)) {
-            printf("%d - ", dados[i]);
+    cout << "Lista: " << endl;
+    for (int i = inicio; i < fim; i++) {
+        if(i != (fim - 1)) {
+            cout << dados[i] << " - ";
         }
         else {
-            printf(" %d", dados[i]);
+            cout << dados[i] << endl;
         }
     }
     

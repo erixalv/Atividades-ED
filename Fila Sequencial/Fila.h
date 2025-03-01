@@ -11,6 +11,7 @@ public:
     bool isFull();
     int size();
     int first();
+    int last();
     bool insert(int v);
     void remove();
     void show();
